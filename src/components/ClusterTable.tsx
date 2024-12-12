@@ -50,9 +50,7 @@ export function ClusterTable({ clusters, onRefresh, isLoading }: ClusterTablePro
 
   const maskCreator = (creator: string) => {
     if (!creator) return '***';
-    const parts = creator.split('@');
-    if (parts.length !== 2) return '***';
-    return `${parts[0].charAt(0)}***@${parts[1]}`;
+    return creator.slice(-3);
   };
 
   const getRowHighlightClass = (cluster: ClusterDetails) => {
