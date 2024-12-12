@@ -128,7 +128,7 @@ export function WorkspaceForm({ onSubmit, isLoading }: WorkspaceFormProps) {
             disabled={isLoading}
             className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
           >
-            {isLoading ? 'Loading...' : 'Submit JSON'}
+            {isLoading ? 'Loading...' : 'Submit'}
           </button>
         </form>
       ) : (
@@ -219,7 +219,7 @@ export function WorkspaceForm({ onSubmit, isLoading }: WorkspaceFormProps) {
               disabled={isLoading}
               className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
             >
-              {isLoading ? 'Loading...' : 'Get Clusters'}
+              {isLoading ? 'Loading...' : 'Submit'}
             </button>
           </div>
         </form>

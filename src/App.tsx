@@ -10,10 +10,14 @@ function App() {
   const [errors, setErrors] = useState<ApiError[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchClusters = async (credentials: WorkspaceCredentials[]) => {
+  const fetchClusters = async () => {
+    if (workspaces.length === 0) {
+      setErrors([{ message: 'Please add workspace credentials first' }]);
+      return;
+    }
     setLoading(true);
     try {
-      const result = await fetchAllClustersParallel(credentials);
+      const result = await fetchAllClustersParallel(workspaces);
       setClusters(result.clusters);
       setErrors(result.errors);
     } catch (error) {
@@ -26,13 +30,8 @@ function App() {
   const handleWorkspaceSubmit = (entries: { credentials: WorkspaceCredentials }[]) => {
     const credentials = entries.map(entry => entry.credentials);
     setWorkspaces(credentials);
-    fetchClusters(credentials);
-  };
-
-  const handleRefresh = () => {
-    if (workspaces.length > 0) {
-      fetchClusters(workspaces);
-    }
+    setErrors([]);
+    setClusters([]);
   };
 
   return (
@@ -43,12 +42,26 @@ function App() {
             AcrossX
           </h1>
           <p className="mt-2 text-sm text-gray-600">
-            Monitor your Databricks clusters across workspaces
+            Monitor your Databricks clusters across Workspaces
           </p>
         </div>
 
         <div className="mt-8">
-          <WorkspaceForm onSubmit={handleWorkspaceSubmit} isLoading={loading} />
+          <div className="space-y-4">
+            <WorkspaceForm onSubmit={handleWorkspaceSubmit} isLoading={loading} />
+            
+            {workspaces.length > 0 && (
+              <div className="flex justify-center">
+                <button
+                  onClick={fetchClusters}
+                  disabled={loading}
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                >
+                  {loading ? 'Loading...' : 'Get Cluster Info'}
+                </button>
+              </div>
+            )}
+          </div>
           
           {errors.length > 0 && (
             <div className="mt-4 p-4 bg-red-50 text-red-700 rounded">
@@ -67,7 +80,7 @@ function App() {
             <div className="mt-8">
               <ClusterTable 
                 clusters={clusters} 
-                onRefresh={handleRefresh}
+                onRefresh={fetchClusters}
                 isLoading={loading}
               />
             </div>
