@@ -14,6 +14,7 @@ Monitor Databricks clusters across Workspaces
 ## Table of Contents
 
 - [Installation](#installation)
+- [Usage](#usage)
 - [Demo](#demo)
 - [Contributing](#contributing)
 - [License](#license)
@@ -26,7 +27,26 @@ docker build -t acrossx .
 docker run -p 3000:3000 acrossx
 ```
 
+## Usage
+1. Input Environment, Workspace URL & Token via Form
+or
+2. Click "Swith to JSON" and input details via JSON format 
+
+```json
+{
+  "url": "https://<workspace1_url>",
+  "token": "<token>",
+  "environment": "<environment>"
+},
+{
+  "url": "https://<workspace2_url>",
+  "token": "<token>",
+  "environment": "<environment>"
+}
+```
+
 ## Demo
+-- WIP --
 
 ## License
 
