@@ -29,7 +29,9 @@ docker run -p 3000:3000 acrossx
 
 ## Usage
 1. Input Environment, Workspace URL & Token via Form
-or
+
+    or
+
 2. Click "Swith to JSON" and input details via JSON format 
 
 ```json
@@ -45,8 +47,11 @@ or
 }
 ```
 
-## Demo
--- WIP --
+## UI
+![AcrossX](assets/AcrossXUI.png)
+
+## Live Demo
+[Try Here](https://acrossx.vercel.app/)
 
 ## License
 
