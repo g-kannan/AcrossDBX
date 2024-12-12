@@ -1,4 +1,5 @@
 ![AcrossX](assets/AcrossX.png)
+
 Monitor Databricks clusters across Workspaces
 
 ## Features
