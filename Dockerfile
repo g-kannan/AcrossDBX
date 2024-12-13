@@ -27,7 +27,7 @@ COPY --from=build /app/dist /usr/share/nginx/html
 
 # Add version label
 LABEL version="1.2.0"
-LABEL description="AcrossX - Databricks Multi-Workspace Cluster Manager with enhanced features"
+LABEL description="AcrossDBX - Databricks Multi-Workspace Cluster Manager with enhanced features"
 LABEL maintainer="DevOps Team"
 
 # Expose port

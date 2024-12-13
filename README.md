@@ -1,4 +1,4 @@
-![AcrossX](assets/AcrossX.png)
+![AcrossDBX](assets/AcrossDBX.png)
 
 Monitor Databricks clusters across Workspaces
 
@@ -22,9 +22,9 @@ Monitor Databricks clusters across Workspaces
 ## Installation
 
 ```bash
-git clone https://github.com/g-kannan/AcrossX.git
-docker build -t acrossx .
-docker run -p 3000:3000 acrossx
+git clone https://github.com/g-kannan/AcrossDBX.git
+docker build -t acrossdbx .
+docker run -p 3000:3000 acrossdbx
 ```
 
 ## Usage
@@ -48,10 +48,10 @@ docker run -p 3000:3000 acrossx
 ```
 
 ## UI
-![AcrossX](assets/AcrossXUI.png)
+![AcrossDBX](assets/AcrossDBXUI.png)
 
 ## Live Demo
-[Try Here](https://acrossx.vercel.app/)
+[Try Here](https://acrossdbx.vercel.app/)
 
 ## License
 
