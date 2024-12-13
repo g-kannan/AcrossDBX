@@ -13,13 +13,21 @@ Monitor Databricks clusters across Workspaces
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Demo](#demo)
+- [Live App](#live-app)
+- [How to Install](#how-to-install)
+- [Instructions](#instructions)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Installation
+## UI
+![AcrossDBX](assets/AcrossDBXUI.png)
+
+## Live App
+Try Here: https://acrossdbx.vercel.app/
+
+## How to Install
+
+### 🐳 Docker
 
 ```bash
 git clone https://github.com/g-kannan/AcrossDBX.git
@@ -27,7 +35,9 @@ docker build -t acrossdbx .
 docker run -p 3000:3000 acrossdbx
 ```
 
-## Usage
+AcrossDBX will be running on <http://localhost:3000/>
+
+## Instructions
 1. Input Environment, Workspace URL & Token via Form
 
     or
@@ -47,11 +57,6 @@ docker run -p 3000:3000 acrossdbx
 }
 ```
 
-## UI
-![AcrossDBX](assets/AcrossDBXUI.png)
-
-## Live Demo
-[Try Here](https://acrossdbx.vercel.app/)
 
 ## License
 
