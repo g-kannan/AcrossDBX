@@ -14,7 +14,7 @@ Monitor Databricks clusters across Workspaces
 ## Table of Contents
 
 - [Live App](#live-app)
-- [How to Install](#how-to-install)
+- [Run Locally](#run-locally)
 - [Instructions](#instructions)
 - [Contributing](#contributing)
 - [License](#license)
