@@ -76,6 +76,10 @@ export function ClusterTable({ clusters, onRefresh, isLoading }: ClusterTablePro
   };
 
   const exportToCsv = () => {
+    const currentTime = new Date().toISOString();
+    const formattedTime = currentTime.replace(/[-:]/g, '').split('+')[0];
+    const fileName = `databricks-clustersinfo-${formattedTime}`;
+
     const headers = [
       'Cluster ID',
       'Cluster Name',
@@ -88,7 +92,9 @@ export function ClusterTable({ clusters, onRefresh, isLoading }: ClusterTablePro
       'Terminated',
       'Uptime/Usage',
       'Auto Termination',
-      'Runtime Engine'
+      'Runtime Engine',
+      'Workspace URL',
+      'Export Time'
     ];
 
     const rows = clusters.map(cluster => [
@@ -105,7 +111,9 @@ export function ClusterTable({ clusters, onRefresh, isLoading }: ClusterTablePro
         ? formatDuration(cluster.uptime_minutes)
         : formatDuration(cluster.usage_minutes),
       cluster.autotermination_minutes ? formatDuration(cluster.autotermination_minutes) : 'Never',
-      cluster.runtime_engine || 'Standard'
+      cluster.runtime_engine || 'Standard',
+      cluster.workspace_url,
+      currentTime
     ]);
 
     const csvContent = [
@@ -117,7 +125,7 @@ export function ClusterTable({ clusters, onRefresh, isLoading }: ClusterTablePro
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
-    link.setAttribute('download', `databricks-clusters-${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `${fileName}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -181,15 +189,9 @@ export function ClusterTable({ clusters, onRefresh, isLoading }: ClusterTablePro
               className="inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               {copySuccess ? (
-                <>
-                  <Check className="h-4 w-4 mr-1 text-green-500" />
-                  Copied!
-                </>
+                <><Check className="h-4 w-4 mr-1 text-green-500" />Copied!</>
               ) : (
-                <>
-                  <Copy className="h-4 w-4 mr-1" />
-                  Copy
-                </>
+                <><Copy className="h-4 w-4 mr-1" />Copy</>
               )}
             </button>
           </div>
@@ -241,6 +243,9 @@ export function ClusterTable({ clusters, onRefresh, isLoading }: ClusterTablePro
               <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Engine
               </th>
+              <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Workspace URL
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -252,7 +257,14 @@ export function ClusterTable({ clusters, onRefresh, isLoading }: ClusterTablePro
                   className={getRowHighlightClass(cluster)}
                 >
                   <td className="px-3 py-2 whitespace-nowrap text-xs font-medium text-gray-500">
-                    {cluster.cluster_id}
+                    <a 
+                      href={`${cluster.workspace_url}/compute/clusters/${cluster.cluster_id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      {cluster.cluster_id}
+                    </a>
                   </td>
                   <td className="px-3 py-2 whitespace-nowrap text-xs font-medium text-gray-900">
                     {cluster.cluster_name}
@@ -312,6 +324,16 @@ export function ClusterTable({ clusters, onRefresh, isLoading }: ClusterTablePro
                   </td>
                   <td className="px-3 py-2 whitespace-nowrap text-xs text-gray-500">
                     {cluster.runtime_engine || 'Standard'}
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap text-xs text-gray-500">
+                    <a 
+                      href={cluster.workspace_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      {cluster.workspace_url}
+                    </a>
                   </td>
                 </tr>
               );

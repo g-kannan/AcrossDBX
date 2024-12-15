@@ -25,7 +25,7 @@ Monitor Databricks clusters across Workspaces
 ## Live App
 Try Here: https://acrossdbx.vercel.app/
 
-## How to Install
+## Run Locally
 
 ### 🐳 Docker
 
